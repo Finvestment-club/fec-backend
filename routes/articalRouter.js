@@ -12,8 +12,9 @@ import {
 } from "../controllers/ArticalController.js";
 import { isAuthorized } from "../middlewares/auth.js";
 
-const router = express.Router();
 
+
+const router = express.Router();
 router.post("/artical-post",isAuthorized, ArticalPost);
 router.get("/artical-get-top3", ArticalGetTop3);
 router.get("/artical-get", ArticalGet);

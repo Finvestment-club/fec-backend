@@ -4,9 +4,11 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import useRouter from "./routes/userRouter.js";
 import articalRouter from "./routes/articalRouter.js";
+import socialmediaRouter from "./routes/socialmediaRouter.js";
 import dbConnection from "./database/dbconnection.js";
 import ErrorHandler from './middlewares/error.js';
 import errorMiddleware from './middlewares/error.js';
+import fileUpload from 'express-fileupload';
 const PORT = process.env.PORT || 4000;
 const app = express();
 dotenv.config({ path: "./config/config.env "});
@@ -30,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5174');
+    res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -41,10 +43,15 @@ app.use((req, res, next) => {
         next();
     }
 });
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir:"/tmp/",
+}));
 
 app.use("/api/v1/user", useRouter);
 app.use("/api/v2/artical", articalRouter);
 
+app.use("/api/v3/socialmedia", socialmediaRouter);
 
 
 
