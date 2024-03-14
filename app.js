@@ -25,7 +25,7 @@ app.use(cors({
 }));
 console.log(process.env.FRONTEND_URL);
 
-// app.options('*', cors());
+ app.options('*', cors());
 
 app.use(cookieParser());
 app.use(express.json());
