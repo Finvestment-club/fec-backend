@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: 'https://superlative-taiyaki-4173d2.netlify.app',
     method: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
